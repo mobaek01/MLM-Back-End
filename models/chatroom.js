@@ -11,7 +11,7 @@ const chatSchema = new Schema({
     online: Boolean,
     offline: Boolean,
     away: Boolean,
-    editOn: Boolean
+    editOn: {type: Boolean, default:false}
     },
     {timestamps:true}
 )
