@@ -1,11 +1,11 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
-const Chat = ('../models/chatroom.js')
+const Chat = require('../models/chatroom.js')
 
 const userSchema = new Schema({
     username: String,
     password: String,
-    messages: [Chat],
+    messages: [Chat.schema],
     friends:[]
 })
 
