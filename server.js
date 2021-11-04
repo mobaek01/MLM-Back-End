@@ -1,5 +1,6 @@
 //// DEPENDENCIES
 const express = require('express')
+const session = require('express-session')
 const mongoose = require('mongoose')
 const cors = require('cors')
 
@@ -17,6 +18,10 @@ app.use(cors())
 //// CONTROLLERS
 const chatroomController = require('./controllers/chatroom_controller.js')
 app.use('/chatrooms', chatroomController)
+const userController = require('./controllers/user_controller.js')
+app.use('/users', userController)
+const sessionController = require('./controllers/sessions_controller.js')
+app.use('/sessions', sessionController)
 
 //// CONNECTIONS
 app.listen(PORT, () => {

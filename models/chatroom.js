@@ -6,7 +6,6 @@ const chatSchema = new Schema({
     message: String,
     likes: Number,
     comments: String,
-    friends:[],
     fromFriend: Boolean,
     online: Boolean,
     offline: Boolean,

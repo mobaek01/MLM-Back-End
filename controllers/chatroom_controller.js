@@ -12,7 +12,10 @@ router.post('/', (req, res) => {
 // READ ROUTE
 router.get('/', (req, res) => {
     Chat.find({}, (error, foundChat) => {
-        res.json(foundChat)
+        res.json(
+            foundChat,
+            {currentUser: req.session.currentUser}
+        )
     })
 })
 
