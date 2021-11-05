@@ -17,4 +17,24 @@ users.post('/', (req, res) => {
     })
 })
 
+// LOG IN
+users.put('/login/:username', (req, res) => {
+    User.findOneAndUpdate(
+        {username: req.params.username},
+        {online: true},
+        (error, changedStatus) => {
+            res.json(changedStatus)
+    })
+})
+
+// LOG OUT
+users.put('/logout/:username', (req, res) => {
+    User.findOneAndUpdate(
+        {username: req.params.username},
+        {online: false},
+        (error, changedStatus) => {
+            res.json(changedStatus)
+    })
+})
+
 module.exports = users;

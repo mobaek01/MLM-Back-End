@@ -4,16 +4,16 @@ const sessions = express.Router()
 const User = require('../models/user.js')
 const Session = require('../models/sessions.js')
 
-// sessions.put('/', (req, res) => {
-//     Session.create({currentUser:[]}, (error, createdSession) => {
-//         res.json(createdSession)
-//     })
-// })
+sessions.get('/', (req, res) => {
+    Session.find({}, (error, foundSession) => {
+        res.json(foundSession)
+    })
+})
 
 // LOG IN FUNC
 sessions.post('/:username', (req, res) => {
     User.findOne({username:req.params.username}, (error, foundUser) => {
-        Session.create({currentUser:foundUser},
+        Session.create({currentUser:foundUser, name:foundUser.username,},
             (error, createdSession) => {
             // createdSession.currentUser.push(foundUser)
             res.json(foundUser)
@@ -22,9 +22,22 @@ sessions.post('/:username', (req, res) => {
 })
 
 // LOG OUT FUNC
-sessions.delete('/:id', (req, res) => {
-    Session.findOneAndRemove({_id:req.params.id}, (error, deletedSession) => {
+sessions.delete('/:name', (req, res) => {
+    Session.findOneAndRemove({name:req.params.name}, (error, deletedSession) => {
+        console.log('session has been destroyed');
         res.json(deletedSession)
+    })
+})
+
+sessions.put('/logout/:name', (req, res) => {
+    Session.findOneAndUpdate(
+        {name:req.params.name},
+        {
+            loginAccepted: false
+        },
+        {new:true},
+        (error, createdSession) => {
+            res.json(createdSession)
     })
 })
 

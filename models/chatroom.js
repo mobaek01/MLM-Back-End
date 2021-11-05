@@ -7,9 +7,6 @@ const chatSchema = new Schema({
     likes: Number,
     comments: String,
     fromFriend: Boolean,
-    online: Boolean,
-    offline: Boolean,
-    away: Boolean,
     editOn: Boolean
     },
     {timestamps:true}

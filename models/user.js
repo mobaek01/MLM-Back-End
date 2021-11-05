@@ -7,6 +7,9 @@ const userSchema = new Schema({
     password: String,
     messages: [Chat.schema],
     friends:[],
+    sessionId:[],
+    online: {type:Boolean, default:false},
+    away: Boolean,
 })
 
 const User = mongoose.model('User', userSchema)
