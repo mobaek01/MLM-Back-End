@@ -4,7 +4,7 @@ const Schema = mongoose.Schema
 
 const sessionSchema = new Schema({
     name: String,
-    loginAccepted: {type:Boolean, default:true},
+    loginAccepted: Boolean,
     currentUser:[User.schema]
 })
 
