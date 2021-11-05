@@ -22,6 +22,8 @@ const userController = require('./controllers/user_controller.js')
 app.use('/users', userController)
 const sessionController = require('./controllers/sessions_controller.js')
 app.use('/sessions', sessionController)
+const friendsController = require('./controllers/friends_controller.js')
+app.use('/friends', friendsController)
 
 //// CONNECTIONS
 app.listen(PORT, () => {
