@@ -2,6 +2,17 @@ const express = require('express')
 const bcrypt = require('bcrypt')
 const sessions = express.Router()
 const User = require('../models/user.js')
+const Session = require('../models/sessions.js')
+
+sessions.post('/:username', (req, res) => {
+    User.findOne({username:req.params.username}, (error, foundUser) => {
+        Session.create(
+            {currentUser:foundUser},
+            (error, createdSession) => {
+                res.json(createdSession)
+            })
+    })
+})
 
 sessions.get('/:username/:password', (req, res) => {
     User.findOne({username:req.params.username}, (error, foundUser) => {
@@ -17,12 +28,6 @@ sessions.get('/:username/:password', (req, res) => {
                 console.log('Your password does not match')
             }
         }
-    })
-})
-
-sessions.delete('/', (req, res) => {
-    req.session.destroy((error, data) => {
-        res.redirect('/chatrooms')
     })
 })
 

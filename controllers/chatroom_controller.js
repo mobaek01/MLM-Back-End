@@ -28,6 +28,17 @@ router.put('/:id', (req, res) => {
     )
 })
 
+router.put('/:id/likes', (req, res) => {
+    Chat.findByIdAndUpdate(
+        req.params.id,
+        {$inc:{likes: 1}},
+        {new:true},
+        (error, updatedChat) => {
+            res.json(updatedChat)
+        }
+    )
+})
+
 // DELETE ROUTE
 router.delete('/:id', (req, res) => {
     Chat.findByIdAndRemove(
