@@ -6,7 +6,7 @@ const userSchema = new Schema({
     username: String,
     password: String,
     messages: [Chat.schema],
-    friends:[]
+    friends:[],
 })
 
 const User = mongoose.model('User', userSchema)
