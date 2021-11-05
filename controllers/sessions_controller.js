@@ -4,13 +4,27 @@ const sessions = express.Router()
 const User = require('../models/user.js')
 const Session = require('../models/sessions.js')
 
+// sessions.put('/', (req, res) => {
+//     Session.create({currentUser:[]}, (error, createdSession) => {
+//         res.json(createdSession)
+//     })
+// })
+
+// LOG IN FUNC
 sessions.post('/:username', (req, res) => {
     User.findOne({username:req.params.username}, (error, foundUser) => {
-        Session.create(
-            {currentUser:foundUser},
+        Session.create({currentUser:foundUser},
             (error, createdSession) => {
-                res.json(createdSession)
-            })
+            // createdSession.currentUser.push(foundUser)
+            res.json(foundUser)
+        })
+    })
+})
+
+// LOG OUT FUNC
+sessions.delete('/:id', (req, res) => {
+    Session.findOneAndRemove({_id:req.params.id}, (error, deletedSession) => {
+        res.json(deletedSession)
     })
 })
 
