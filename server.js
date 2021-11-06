@@ -15,6 +15,11 @@ const MONGODB_URI = process.env.MONGODB_URI;
 app.use(express.json())
 app.use(cors())
 
+//ROUTE
+app.get('/', (req, res) => {
+    res.redirect('/chatrooms')
+})
+
 //// CONTROLLERS
 const chatroomController = require('./controllers/chatroom_controller.js')
 app.use('/chatrooms', chatroomController)
