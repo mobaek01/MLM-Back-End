@@ -2,7 +2,9 @@ const express = require('express')
 const User = require('../models/user.js')
 const friends = express.Router()
 
+
 //----------------------Add Friend------------
+
 friends.post('/:username/:friend', (req, res) => {
    User.findOne({username:req.params.username}, (error, foundUser) => {
       User.findOne({username:req.params.friend}, (error, foundFriend) => {
