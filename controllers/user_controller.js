@@ -30,6 +30,7 @@ users.post('/', (req, res) => {
 // })
 
 //=====================Log out================
+
 // users.put('/logout/:username', (req, res) => {
 //     User.findOneAndUpdate(
 //         {username: req.params.username},
