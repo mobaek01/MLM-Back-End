@@ -19,6 +19,7 @@ users.post('/', (req, res) => {
 })
 
 //======================Log in==============================
+
 // users.put('/login/:username', (req, res) => {
 //     User.findOneAndUpdate(
 //         {username: req.params.username},
@@ -29,6 +30,8 @@ users.post('/', (req, res) => {
 // })
 
 //=====================Log out================
+=======
+
 // users.put('/logout/:username', (req, res) => {
 //     User.findOneAndUpdate(
 //         {username: req.params.username},
