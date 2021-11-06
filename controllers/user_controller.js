@@ -3,12 +3,13 @@ const bcrypt = require('bcrypt')
 const users = express.Router()
 const User = require('../models/user.js')
 
+//---------------Find all users------------------
 users.get('/', (req, res) => {
     User.find({}, (error, foundUser) => {
         res.json(foundUser)
     })
 })
-
+//==================Create User====================
 users.post('/', (req, res) => {
     req.body.password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10))
     User.create(req.body, (error, createdUser) => {
@@ -17,7 +18,8 @@ users.post('/', (req, res) => {
     })
 })
 
-// // LOG IN
+//======================Log in==============================
+
 // users.put('/login/:username', (req, res) => {
 //     User.findOneAndUpdate(
 //         {username: req.params.username},
@@ -26,8 +28,10 @@ users.post('/', (req, res) => {
 //             res.json(changedStatus)
 //     })
 // })
-//
-// // LOG OUT
+
+//=====================Log out================
+=======
+
 // users.put('/logout/:username', (req, res) => {
 //     User.findOneAndUpdate(
 //         {username: req.params.username},

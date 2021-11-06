@@ -4,24 +4,28 @@ const sessions = express.Router()
 const User = require('../models/user.js')
 const Session = require('../models/sessions.js')
 
-sessions.get('/', (req, res) => {
+//--------------find  sessions------------------------
+sessions.get('/', (req, res) => {//find all
     Session.find({}, (error, foundSession) => {
         res.json(foundSession)
     })
 })
 
-// LOG IN FUNC
-sessions.post('/:username', (req, res) => {
-    User.findOne({username:req.params.username}, (error, foundUser) => {
-        Session.create({currentUser:foundUser, name:foundUser.username,},
-            (error, createdSession) => {
-            // createdSession.currentUser.push(foundUser)
-            res.json(foundUser)
-        })
-    })
+sessions.get('/find/:name', (req, res) => {//find one by name
+   Session.findOne({name:req.params.name}, (error, foundSession) => {
+      if(error){
+         console.log('something wrong(sessions_controller ln17)');
+      }
+      if (foundSession){
+         res.json(foundSession)
+      } else {
+         console.log('no session found');
+         res.json({loginAccepted:false})
+      }
+   })
 })
 
-// LOG OUT FUNC
+//======================Log out==============================
 sessions.delete('/:name', (req, res) => {
     Session.findOneAndRemove({name:req.params.name}, (error, deletedSession) => {
         console.log('session has been destroyed');
@@ -41,7 +45,19 @@ sessions.put('/logout/:name', (req, res) => {
     })
 })
 
-sessions.get('/:username/:password', (req, res) => {
+//====================On login, create a 'session'===============
+sessions.post('/:username', (req, res) => {
+    User.findOne({username:req.params.username}, (error, foundUser) => {
+        Session.create({currentUser:foundUser, name:foundUser.username,},
+            (error, createdSession) => {
+            // createdSession.currentUser.push(foundUser)
+            res.json(foundUser)
+        })
+    })
+})
+
+//====================Check login credentials==================
+sessions.get('/login/:username/:password', (req, res) => {
     User.findOne({username:req.params.username}, (error, foundUser) => {
         if(error) {
             console.log('The database had a problem')
@@ -49,7 +65,6 @@ sessions.get('/:username/:password', (req, res) => {
             console.log('Sorry, your username cannot be found')
         } else {
             if (bcrypt.compareSync(req.params.password, foundUser.password)) {
-                // req.session.currentUser = foundUser
                 console.log('you are logged in')
             } else {
                 console.log('Your password does not match')
