@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const Chat = require('../models/chatroom.js')
+const User = require('../models/user.js')
 
 // CREATE ROUTE
 router.post('/', (req, res) => {
