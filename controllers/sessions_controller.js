@@ -77,7 +77,7 @@ sessions.get('/login/:username/:password', (req, res) => {
         } else if (!foundUser) {
             console.log('Sorry, your username cannot be found')
         } else {
-            if (bcrypt.compareSync(req.params.password, foundUser.password)) {
+            if (bcrypt.compareSync(foundUser.password, req.params.password)) {
                 console.log('you are logged in')
             } else {
                 console.log('Your password does not match')
