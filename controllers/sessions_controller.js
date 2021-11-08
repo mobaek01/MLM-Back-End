@@ -62,8 +62,7 @@ sessions.put('/logout/:name', (req, res) => {
 //====================On login, create a 'session'===============
 sessions.post('/:username', (req, res) => {
     User.findOne({username:req.params.username}, (error, foundUser) => {
-        Session.create({currentUser:foundUser, name:foundUser.username,},
-            (error, createdSession) => {
+        Session.create({name:req.params.username, currentUser:foundUser}, (error, createdSession) => {
             // createdSession.currentUser.push(foundUser)
             res.json(foundUser)
         })

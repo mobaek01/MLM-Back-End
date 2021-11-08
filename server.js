@@ -12,8 +12,9 @@ const PORT = process.env.PORT || 3003;
 const MONGODB_URI = process.env.MONGODB_URI;
 
 //// MIDDLEWARE
+
 app.use(express.json())
-app.use(cors())
+
 
 //// CONTROLLERS
 const chatroomController = require('./controllers/chatroom_controller.js')
@@ -25,6 +26,7 @@ app.use('/sessions', sessionController)
 const friendsController = require('./controllers/friends_controller.js')
 app.use('/friends', friendsController)
 
+app.use(cors())
 //// CONNECTIONS
 app.listen(PORT, () => {
     console.log('Listening on port...', PORT);
