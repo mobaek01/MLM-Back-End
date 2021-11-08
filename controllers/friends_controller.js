@@ -15,11 +15,13 @@ friends.post('/:username/:friend', (req, res) => {
    })
 })
 //-----------------Remove Friend--------
-friends.put('/:username/:friend', (req, res) => {
+friends.put('/:username/:name', (req, res) => {
    User.findOne({username:req.params.username}, (error, foundUser) => {
+       console.log("am i working");
       const findIndex = () => {//find the index to splice out
+
          for (let i = 0; i<foundUser.friends.length; i++) {
-            if(foundUser.friends[i].username == req.params.friend){
+            if(foundUser.friends[i].username == req.params.name){
                console.log(`found friend at ${i}`);
                return i
             }
@@ -30,5 +32,6 @@ friends.put('/:username/:friend', (req, res) => {
       res.json(foundUser)
    })
 })
+
 
 module.exports = friends;
