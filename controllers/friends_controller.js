@@ -20,6 +20,7 @@ friends.put('/:username/:friend', (req, res) => {
       const findIndex = () => {//find the index to splice out
          for (let i = 0; i<foundUser.friends.length; i++) {
             if(foundUser.friends[i].username == req.params.friend){
+               console.log(`found friend at ${i}`);
                return i
             }
          }
