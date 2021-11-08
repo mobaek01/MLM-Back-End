@@ -25,19 +25,19 @@ sessions.get('/find/:name', (req, res) => {//find one by name
    })
 })
 
-sessions.get('/friends/:name', (req, res) => {//find one by name
-   Session.findOne({name:req.params.name}, (error, foundSession) => {
-      if(error){
-         console.log('something wrong(sessions_controller ln17)');
-      }
-      if (foundSession){
-         res.json(foundSession)
-      } else {
-         console.log('no session found');
-         res.json({loginAccepted:false})
-      }
-   })
-})
+// sessions.get('/friends/:name', (req, res) => {//find one by name
+//    Session.findOne({name:req.params.name}, (error, foundSession) => {
+//       if(error){
+//          console.log('something wrong(sessions_controller ln17)');
+//       }
+//       if (foundSession){
+//          res.json(foundSession)
+//       } else {
+//          console.log('no session found');
+//          res.json({loginAccepted:false})
+//       }
+//    })
+// })
 
 //======================Log out==============================
 sessions.delete('/:name', (req, res) => {
